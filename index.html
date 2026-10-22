@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lituanica Athletic Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: white base with a dark, photo-led hero (Zalgiris-style), Lithuanian tricolor accents, interactive slideshow, tabs and reveals. */
+:root{
+  --bg:#ffffff;
+  --fg:#0d1a14;
+  --muted:#5b6660;
+  --green:#006a44;
+  --green-bright:#8ee04a;
+  --green-soft:#eef6f1;
+  --yellow:#fdb913;
+  --red:#c1272d;
+  --dark:#07120d;
+  --line:#e4e9e6;
+  --card:#f3f5f4;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0}
+body{
+  background:var(--bg);color:var(--fg);
+  font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1200px;margin:0 auto}
+h1,h2,h3{font-family:Oswald,Inter,sans-serif;font-weight:700;text-wrap:balance;margin:0;text-transform:uppercase;letter-spacing:.01em}
+h2{font-size:clamp(28px,4vw,44px);line-height:1.1}
+h2 span{color:var(--green)}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+
+/* Tricolor strip */
+.tricolor{height:6px;background:linear-gradient(90deg,var(--yellow) 0 33.33%,var(--green) 33.33% 66.66%,var(--red) 66.66%)}
+
+/* Header (sticky) */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);transition:box-shadow .25s ease}
+.site-header.scrolled{box-shadow:0 6px 20px rgba(0,0,0,.08)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.logo img{height:52px;width:auto}
+.menu{display:flex;align-items:center;gap:22px}
+.menu a{text-decoration:none;font-weight:600;font-size:15px;position:relative;padding-block:4px}
+.menu a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.menu a:hover::after,.menu a.active::after{transform:scaleX(1)}
+.menu a:hover{color:var(--green)}
+.nav-toggle{display:none;background:none;border:2px solid var(--fg);border-radius:4px;padding:8px 12px;font:inherit;font-weight:700;cursor:pointer}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:4px;font-weight:700;text-decoration:none;font-size:15px;border:2px solid var(--fg);color:var(--fg);background:transparent;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease,transform .2s ease}
+.btn:hover{transform:translateY(-1px);border-color:var(--green);color:var(--green)}
+.btn.primary{background:var(--green);border-color:var(--green);color:#fff}
+.btn.primary:hover{background:#00553a;border-color:#00553a;color:#fff}
+.btn.light{border-color:#fff;color:#fff}
+.btn.light:hover{background:#fff;color:var(--dark);border-color:#fff}
+
+/* Dark hero (reference style) */
+.hero{position:relative;background:var(--dark);color:#fff;overflow:hidden;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));min-height:520px;display:flex;align-items:center}
+.hero-slides{position:absolute;inset:0}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;object-position:center 20%;transform:scale(1.04);transition:transform 6s ease}
+.slide.on img{transform:scale(1)}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--dark) 8%,rgba(7,18,13,.7) 45%,rgba(7,18,13,.15) 100%)}
+.hero-inner{position:relative;z-index:2;padding-block:72px;max-width:1200px;margin:0 auto;width:100%}
+.hero h1{font-size:clamp(40px,6.5vw,84px);line-height:.98;max-width:14ch}
+.hero h1 .g{color:var(--green-bright)}
+.hero p{color:#c9d3cd;font-size:18px;max-width:46ch;margin:20px 0 28px}
+.hero .kicker{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dark);background:var(--green-bright);padding:6px 10px;border-radius:3px;margin-bottom:18px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.dots{position:absolute;z-index:2;right:max(16px,env(safe-area-inset-right,0px));bottom:24px;display:flex;gap:8px}
+.dots button{width:34px;height:4px;border:0;padding:0;background:rgba(255,255,255,.35);cursor:pointer;border-radius:2px;transition:background .3s ease,width .3s ease}
+.dots button.on{background:var(--yellow);width:56px}
+.hero .lt{position:absolute;left:0;right:0;bottom:0;height:6px;background:linear-gradient(90deg,var(--yellow) 0 33.33%,var(--green) 33.33% 66.66%,var(--red) 66.66%);z-index:3}
+
+/* Section scaffolding */
+.section{padding-block:64px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+
+/* Reveal: visible by default; JS adds the animated state only when supported */
+.js .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
+
+/* Photo cards with hover */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.card{background:var(--card);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:var(--fg);position:relative}
+.card .img{aspect-ratio:4/5;background:#e7ebe9;overflow:hidden}
+.card .img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card:hover .img img{transform:scale(1.06)}
+.card .label{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;font-family:Oswald,Inter,sans-serif;font-weight:600;font-size:22px;text-transform:uppercase;transition:background .25s ease,color .25s ease}
+.card .label i{font-style:normal;color:var(--green);font-size:24px;transition:transform .25s ease}
+.card:hover .label{background:var(--green);color:#fff}
+.card:hover .label i{color:#fff;transform:translateX(6px)}
+
+/* Tabs */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{border:2px solid var(--line);background:#fff;border-radius:4px;padding:9px 14px;font:inherit;font-weight:700;cursor:pointer;color:var(--fg);transition:all .2s ease}
+.tab:hover{border-color:var(--green);color:var(--green)}
+.tab[aria-selected="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.tabpanel{display:none}
+.tabpanel.on{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.tryouts{display:grid;grid-template-columns:1.2fr 1fr;gap:24px}
+.panel{border:1px solid var(--line);border-radius:4px;padding:24px}
+.panel h3{font-size:22px;margin-bottom:12px;color:var(--green)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{text-align:left;padding:10px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.note{font-size:14px;color:var(--muted);margin-top:14px}
+.panel a.link{color:var(--green);font-weight:600}
+
+/* News with hover lift */
+.news{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.news a{display:block;text-decoration:none;border-top:4px solid var(--yellow);padding:18px 16px;background:var(--card);border-radius:0 0 4px 4px;min-height:140px;transition:transform .25s ease,box-shadow .25s ease}
+.news a:nth-child(3n+2){border-top-color:var(--green)}
+.news a:nth-child(3n){border-top-color:var(--red)}
+.news a:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,.08)}
+.news time{font-size:13px;color:var(--muted)}
+.news strong{display:block;font-family:Oswald,Inter,sans-serif;font-size:19px;text-transform:uppercase;margin-top:6px;line-height:1.2}
+
+/* Visit */
+.visit{background:var(--green-soft);border-radius:4px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.visit dt{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.visit dd{margin:4px 0 16px;font-size:17px}
+.visit a{color:var(--green);font-weight:600}
+.copy{margin-left:8px;font:inherit;font-size:12px;font-weight:700;border:1px solid var(--green);background:#fff;color:var(--green);border-radius:3px;padding:2px 8px;cursor:pointer}
+
+footer{padding-block:32px 40px;border-top:1px solid var(--line);margin-top:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+footer img{height:44px;width:auto}
+footer .social a{color:var(--green);font-weight:600;margin-left:14px}
+
+/* Logo motifs: bouncing ball in hero, swoosh dividers, hoop back-to-top */
+.hero-ball{position:absolute;z-index:2;right:max(4%,16px);top:18%;width:clamp(120px,16vw,200px);height:auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.35));animation:bounce 3.2s ease-in-out infinite;cursor:pointer;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.hero-ball:hover{transform:rotate(360deg) scale(1.05)}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+.swoosh{display:block;width:100%;height:56px;margin:8px 0 -8px}
+.swoosh path{fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-dasharray:1600;stroke-dashoffset:0}
+.swoosh path.accent{stroke:var(--yellow);stroke-width:2}
+.js .swoosh path{stroke-dashoffset:1600;transition:stroke-dashoffset 1.6s ease}
+.js .swoosh.in path{stroke-dashoffset:0}
+.hoop-top{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:#fff;border:2px solid var(--green);box-shadow:0 8px 20px rgba(0,0,0,.15);padding:6px;cursor:pointer;z-index:30;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .3s ease,transform .3s ease}
+.hoop-top.show{opacity:1;transform:none;pointer-events:auto}
+.hoop-top img{width:100%;height:100%;object-fit:contain;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.hoop-top:hover img{transform:rotate(-20deg)}
+.hoop-top.dunk img{transform:rotate(360deg) scale(1.1)}
+@media (max-width:900px){.hero-ball{width:110px;top:auto;bottom:14%;right:16px}}
+@media (prefers-reduced-motion:reduce){.hero-ball{animation:none}.js .swoosh path{stroke-dashoffset:0}}
+
+/* Mobile */
+@media (max-width:900px){
+  .menu{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;flex-direction:column;align-items:flex-start;gap:0;padding:12px 16px 20px;border-bottom:1px solid var(--line);box-shadow:0 12px 24px rgba(0,0,0,.08)}
+  .menu.open{display:flex}
+  .menu a{padding:12px 0;width:100%;border-bottom:1px solid var(--line)}
+  .menu a::after{display:none}
+  .nav-toggle{display:inline-block}
+  .site-header{position:sticky}
+  .site-header .bar{position:relative}
+  .tryouts,.visit{grid-template-columns:1fr}
+  .hero{min-height:560px}
+  .hero::before{background:linear-gradient(180deg,rgba(7,18,13,.55),rgba(7,18,13,.92) 70%)}
+}
+@media (max-width:540px){
+  .hero h1{font-size:40px}
+  .logo img{height:44px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js');</script>
+<div class="tricolor"></div>
+
+<div class="wrap">
+  <header class="site-header" id="siteHeader">
+    <div class="bar">
+      <a class="logo" href="#home"><img src="logo.png" alt="Lituanica Athletic Club logo"></a>
+      <nav class="menu" id="menu" aria-label="Main">
+        <a href="#home" class="active">Home</a>
+        <a href="https://lituanicabasketball.com/pages/about-us">About</a>
+        <a href="https://lituanicabasketball.com/pages/coaches">Coaches</a>
+        <a href="#tryouts">Tryouts</a>
+        <a href="https://lituanicabasketball.com/blogs/news">News</a>
+        <a href="#visit">Contact</a>
+      </nav>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="menu">Menu</button>
+        <a class="btn primary" href="https://lituanicabasketball.com/pages/join-now">Join now</a>
+      </div>
+    </div>
+  </header>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-slides" aria-hidden="true">
+    <div class="slide on"><img src="https://lituanicabasketball.com/cdn/shop/files/man-gc66f67005_1920.jpg?v=1644338045" alt=""></div>
+    <div class="slide"><img src="https://lituanicabasketball.com/cdn/shop/files/2006.jpg?v=1644337858" alt=""></div>
+    <div class="slide"><img src="https://lituanicabasketball.com/cdn/shop/files/cool.jpg?v=1644349204" alt=""></div>
+    <div class="slide"><img src="https://lituanicabasketball.com/cdn/shop/files/lit.jpg?v=1645418399" alt=""></div>
+    <div class="slide"><img src="https://lituanicabasketball.com/cdn/shop/files/200666.jpg?v=1644338725" alt=""></div>
+  </div>
+  <img class="hero-ball" src="logo.png" alt="" aria-hidden="true">
+  <div class="hero-inner">
+    <span class="kicker">Spring registration open</span>
+    <h1><span class="g">Lituanica</span> Athletic Club</h1>
+    <p>A non-profit that teaches the fundamentals of basketball, competition and good sportsmanship, with full-time coaches for athletes of every age.</p>
+    <div class="ctas">
+      <a class="btn light" href="https://lituanicabasketball.com/pages/join-now">Join now</a>
+      <a class="btn" href="#tryouts" style="color:#fff;border-color:rgba(255,255,255,.5)">See tryouts</a>
+    </div>
+  </div>
+  <div class="dots" id="dots" role="tablist" aria-label="Hero photos"></div>
+  <div class="lt"></div>
+</section>
+
+<div class="wrap" aria-hidden="true">
+  <svg class="swoosh reveal" viewBox="0 0 1200 56" preserveAspectRatio="none">
+    <path d="M0 40 C 300 -10, 600 -10, 1200 30"/>
+    <path class="accent" d="M0 50 C 320 10, 640 10, 1200 44"/>
+  </svg>
+</div>
+<section class="section" id="players">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Our <span>players</span></h2>
+      <a class="btn" href="https://lituanicabasketball.com/pages/about-us">About us</a>
+    </div>
+    <div class="cards">
+      <a class="card reveal" href="https://lituanicabasketball.com/pages/about-us">
+        <div class="img"><img src="https://lituanicabasketball.com/cdn/shop/files/2006.jpg?v=1644337858" alt="Lituanica players"></div>
+        <div class="label">Our teams <i>&rarr;</i></div>
+      </a>
+      <a class="card reveal" href="https://lituanicabasketball.com/pages/coaches">
+        <div class="img"><img src="https://lituanicabasketball.com/cdn/shop/files/cool.jpg?v=1644349204" alt="Lituanica players"></div>
+        <div class="label">Coaches <i>&rarr;</i></div>
+      </a>
+      <a class="card reveal" href="https://lituanicabasketball.com/blogs/news">
+        <div class="img"><img src="https://lituanicabasketball.com/cdn/shop/files/lit.jpg?v=1645418399" alt="Lituanica team"></div>
+        <div class="label">News &amp; tournaments <i>&rarr;</i></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="tryouts" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Tryouts &amp; <span>schedule</span></h2>
+    </div>
+    <div class="tryouts">
+      <div class="panel reveal">
+        <h3>Boys tryouts</h3>
+        <div class="tabs" role="tablist" aria-label="Choose a grade group">
+          <button class="tab" role="tab" aria-selected="true" aria-controls="t-young" data-tab="t-young">1st&ndash;3rd</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="t-mid" data-tab="t-mid">4th&ndash;7th</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="t-eighth" data-tab="t-eighth">8th</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="t-high" data-tab="t-high">9th&ndash;12th</button>
+        </div>
+        <div class="tabpanel on" id="t-young" role="tabpanel"><p style="margin:0">No tryouts. We are accepting new players, starting September 1st, 5:30&ndash;7:00 pm.</p></div>
+        <div class="tabpanel" id="t-mid" role="tabpanel">
+          <table>
+            <thead><tr><th>Grade</th><th>Dates and times</th></tr></thead>
+            <tbody>
+              <tr><td>4th</td><td>Aug 24 &amp; 26, 6:00&ndash;7:30 pm</td></tr>
+              <tr><td>5th</td><td>Aug 24 &amp; 26, 6:00&ndash;7:30 pm</td></tr>
+              <tr><td>6th</td><td>Aug 25 &amp; 26, 6:00&ndash;7:30 pm</td></tr>
+              <tr><td>7th</td><td>Aug 24, 6:00&ndash;7:30 pm &amp; Aug 26, 7:30&ndash;9:00 pm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tabpanel" id="t-eighth" role="tabpanel">
+          <table>
+            <thead><tr><th>Team</th><th>Dates and times</th></tr></thead>
+            <tbody>
+              <tr><td>Arvydas</td><td>Aug 24 &amp; 25, 7:30&ndash;9:00 pm</td></tr>
+              <tr><td>Stepas</td><td>Aug 24, 7:30&ndash;9:00 pm &amp; Aug 25, 7:00&ndash;8:30 pm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tabpanel" id="t-high" role="tabpanel">
+          <table>
+            <thead><tr><th>Grade</th><th>Dates and times</th></tr></thead>
+            <tbody>
+              <tr><td>9th &amp; 10th</td><td>Aug 24 &amp; 26, 7:30&ndash;9:00 pm</td></tr>
+              <tr><td>11th &amp; 12th</td><td>Aug 24 &amp; 26, 7:30&ndash;9:00 pm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Full details on the <a class="link" href="https://lituanicabasketball.com/pages/join-now">join page</a>.</p>
+      </div>
+      <div class="panel reveal">
+        <h3>Get in touch</h3>
+        <p style="margin:0 0 14px">For boys tryouts, email <a class="link" href="mailto:lituanica.info247@gmail.com">lituanica.info247@gmail.com</a> or call coach Stepas at <strong>(630) 235-0264</strong>.</p>
+        <p style="margin:0 0 14px">For girls teams, call coach Aurimas at <strong>(630) 999-5312</strong>.</p>
+        <p class="note" style="margin-top:20px">Follow us on <a class="link" href="https://www.instagram.com/lituanicabasketball/">Instagram</a> and <a class="link" href="https://www.facebook.com/Lituanica-Basketball-Academy-102461096501814/">Facebook</a>. That's where we post the most.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Latest <span>news</span></h2>
+      <a class="btn" href="https://lituanicabasketball.com/blogs/news">All news</a>
+    </div>
+    <div class="news">
+      <a class="reveal" href="https://lituanicabasketball.com/blogs/news/lituanica-player-matas-buzelis-drafted-by-the-bulls"><time>Jun 27, 2024</time><strong>Matas Buzelis drafted by the Bulls</strong></a>
+      <a class="reveal" href="https://lituanicabasketball.com/blogs/news/fall-season-tryouts"><time>Jun 20, 2024</time><strong>Fall season tryouts</strong></a>
+      <a class="reveal" href="https://lituanicabasketball.com/blogs/news/gym-rats-basketball-tournament"><time>Feb 12, 2024</time><strong>Gym Rats basketball tournament</strong></a>
+      <a class="reveal" href="https://lituanicabasketball.com/blogs/news/lituanica-u17-elite-last-prep-hoops-tournament"><time>Jul 18, 2023</time><strong>U17 Elite at Last Prep Hoops</strong></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="visit" style="padding-top:0">
+  <div class="wrap">
+    <div class="visit reveal">
+      <div>
+        <h2 style="margin-bottom:16px">Come <span>visit us</span></h2>
+        <dl style="margin:0">
+          <dt>Address</dt>
+          <dd><a href="https://maps.google.com?daddr=14911%20127th%20Street%2C%20Lemont%2C%20IL%2060439">14911 127th Street, Lemont, IL 60439</a></dd>
+          <dt>Hours</dt>
+          <dd>Mon&ndash;Fri, 8:00 am&ndash;5:00 pm<br>Sat &amp; Sun: closed</dd>
+        </dl>
+      </div>
+      <div>
+        <dl style="margin:0">
+          <dt>Email</dt>
+          <dd><span id="email">lituanica.info247@gmail.com</span><button class="copy" data-copy="lituanica.info247@gmail.com">Copy</button></dd>
+          <dt>Phone</dt>
+          <dd>Coach Stepas Zilys: (630) 235-0264<br>Coach Aurimas: (630) 999-5312</dd>
+        </dl>
+        <a class="btn primary" href="https://maps.google.com?daddr=14911%20127th%20Street%2C%20Lemont%2C%20IL%2060439">Get directions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<button class="hoop-top" id="hoopTop" aria-label="Back to top"><img src="logo.png" alt=""></button>
+
+<footer class="wrap">
+  <img src="logo.png" alt="Lituanica logo">
+  <div>&copy; Lituanica Athletic Club NFP &middot; Lemont, IL
+    <span class="social"><a href="https://www.facebook.com/Lituanica-Basketball-Academy-102461096501814/">Facebook</a><a href="https://www.instagram.com/lituanicabasketball/">Instagram</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Sticky header shadow on scroll
+  var header=document.getElementById('siteHeader');
+  window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>10);},{passive:true});
+
+  // Mobile menu
+  var toggle=document.getElementById('navToggle'), menu=document.getElementById('menu');
+  toggle.addEventListener('click',function(){
+    var open=menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded',open);
+  });
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');toggle.setAttribute('aria-expanded',false);});});
+
+  // Highlight the nav link for the section in view
+  var links=[].slice.call(menu.querySelectorAll('a[href^="#"]'));
+  var sections=links.map(function(a){return document.querySelector(a.getAttribute('href'));}).filter(Boolean);
+  if('IntersectionObserver' in window){
+    var nav=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id);});
+        }
+      });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    sections.forEach(function(s){nav.observe(s);});
+  }
+
+  // Hero slideshow with dots (auto-advances, pauses on hover)
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var dotsWrap=document.getElementById('dots');
+  var idx=0,timer;
+  slides.forEach(function(_,i){
+    var b=document.createElement('button');
+    b.setAttribute('aria-label','Show photo '+(i+1));
+    b.addEventListener('click',function(){go(i);restart();});
+    dotsWrap.appendChild(b);
+  });
+  function go(i){
+    idx=(i+slides.length)%slides.length;
+    slides.forEach(function(s,k){s.classList.toggle('on',k===idx);});
+    [].forEach.call(dotsWrap.children,function(d,k){d.classList.toggle('on',k===idx);});
+  }
+  function restart(){clearInterval(timer);timer=setInterval(function(){go(idx+1);},6000);}
+  go(0);restart();
+  var hero=document.getElementById('home');
+  hero.addEventListener('mouseenter',function(){clearInterval(timer);});
+  hero.addEventListener('mouseleave',restart);
+
+  // Tryout tabs
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      tabs.forEach(function(x){x.setAttribute('aria-selected',x===t);});
+      document.querySelectorAll('.tabpanel').forEach(function(p){p.classList.toggle('on',p.id===t.dataset.tab);});
+    });
+  });
+
+  // Copy email
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var text=b.dataset.copy;
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(text).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy';},1500);}).catch(function(){});
+      }
+    });
+  });
+
+  // Hoop back-to-top: appears after scrolling, spins like a dunk on click
+  var hoop=document.getElementById('hoopTop');
+  window.addEventListener('scroll',function(){hoop.classList.toggle('show',window.scrollY>600);},{passive:true});
+  hoop.addEventListener('click',function(){
+    hoop.classList.add('dunk');
+    setTimeout(function(){window.scrollTo({top:0,behavior:'smooth'});},250);
+    setTimeout(function(){hoop.classList.remove('dunk');},900);
+  });
+
+  // Scroll reveal (content stays visible if JS or IntersectionObserver is unavailable)
+  var reveals=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      });
+    },{threshold:0.12});
+    reveals.forEach(function(el){io.observe(el);});
+  } else {
+    reveals.forEach(function(el){el.classList.add('in');});
+  }
+})();
+</script>
+</body>
+</html>
