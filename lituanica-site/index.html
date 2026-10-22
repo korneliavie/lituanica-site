@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lituanica Athletic Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<div class="topstrip"></div>
+<header class="site-header" id="siteHeader">
+  <div class="bar">
+    <a class="logo" href="index.html"><img src="logo.png" alt="Lituanica Athletic Club logo"></a>
+    <nav class="menu" id="menu" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="coaches.html">Coaches</a>
+      <a href="tryouts.html">Tryouts</a>
+      <a href="news.html">News</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="menu">Menu</button>
+      <a class="btn primary" href="tryouts.html">Join now</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-slides" aria-hidden="true">
+    <div class="slide on"><img src="https://lituanicabasketball.com/cdn/shop/files/man-gc66f67005_1920.jpg?v=1644338045" alt=""></div>
+    <div class="slide"><img src="https://lituanicabasketball.com/cdn/shop/files/2006.jpg?v=1644337858" alt=""></div>
+    <div class="slide"><img src="https://lituanicabasketball.com/cdn/shop/files/cool.jpg?v=1644349204" alt=""></div>
+    <div class="slide"><img src="https://lituanicabasketball.com/cdn/shop/files/lit.jpg?v=1645418399" alt=""></div>
+    <div class="slide"><img src="https://lituanicabasketball.com/cdn/shop/files/200666.jpg?v=1644338725" alt=""></div>
+  </div>
+  <img class="hero-ball" src="logo.png" alt="" aria-hidden="true">
+  <div class="hero-inner">
+    <span class="kicker">Spring registration open</span>
+    <h1><span class="g">Lituanica</span> Athletic Club</h1>
+    <p>A non-profit that teaches the fundamentals of basketball, competition and good sportsmanship, with full-time coaches for athletes of every age.</p>
+    <div class="ctas">
+      <a class="btn primary" href="tryouts.html">See tryouts</a>
+      <a class="btn light" href="contact.html">Contact us</a>
+    </div>
+  </div>
+  <div class="dots" id="dots" aria-label="Hero photos"></div>
+  <div class="lt"></div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Our <span>programs</span></h2>
+      <p class="lead">Pick a program to see who to contact and when.</p>
+    </div>
+    <div class="cards">
+      <a class="card reveal" href="tryouts.html">
+        <div class="img"><img src="https://lituanicabasketball.com/cdn/shop/files/2006.jpg?v=1644337858" alt="Lituanica boys team"></div>
+        <div class="label">Boys teams <i>&rarr;</i></div>
+      </a>
+      <a class="card reveal" href="coaches.html">
+        <div class="img"><img src="https://lituanicabasketball.com/cdn/shop/files/cool.jpg?v=1644349204" alt="Lituanica players"></div>
+        <div class="label">Girls teams <i>&rarr;</i></div>
+      </a>
+      <a class="card reveal" href="news.html">
+        <div class="img"><img src="https://lituanicabasketball.com/cdn/shop/files/lit.jpg?v=1645418399" alt="Lituanica team"></div>
+        <div class="label">News &amp; tournaments <i>&rarr;</i></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" aria-hidden="true">
+  <svg class="swoosh reveal" viewBox="0 0 1200 56" preserveAspectRatio="none">
+    <path d="M0 40 C 300 -10, 600 -10, 1200 30"/>
+    <path class="accent" d="M0 50 C 320 10, 640 10, 1200 44"/>
+  </svg>
+</div>
+
+<section class="section" style="padding-top:40px">
+  <div class="wrap about">
+    <div class="reveal">
+      <h2>About <span>the club</span></h2>
+      <p style="margin-top:18px">Lituanica Athletic Club NFP (LAC) is a non-profit that teaches the fundamentals of basketball, competition and good sportsmanship.</p>
+      <p><a class="btn" href="about.html" style="margin-top:8px">Read more</a></p>
+    </div>
+    <div class="photo reveal">
+      <img src="https://lituanicabasketball.com/cdn/shop/files/200666.jpg?v=1644338725" alt="Lituanica players in the gym">
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="logo.png" alt="Lituanica logo">
+    <div>&copy; Lituanica Athletic Club NFP &middot; Lemont, IL
+      <span><a href="https://www.facebook.com/Lituanica-Basketball-Academy-102461096501814/" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/lituanicabasketball/" target="_blank" rel="noopener">Instagram</a></span>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+<script src="script.js"></script>
+</body>
+</html>

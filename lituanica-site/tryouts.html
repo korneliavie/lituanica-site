@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tryouts | Lituanica Athletic Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<div class="topstrip"></div>
+<header class="site-header" id="siteHeader">
+  <div class="bar">
+    <a class="logo" href="index.html"><img src="logo.png" alt="Lituanica Athletic Club logo"></a>
+    <nav class="menu" id="menu" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="coaches.html">Coaches</a>
+      <a href="tryouts.html">Tryouts</a>
+      <a href="news.html">News</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-cta">
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="menu">Menu</button>
+      <a class="btn primary" href="tryouts.html">Join now</a>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <h1>Tryouts &amp; <span class="g">schedule</span></h1>
+    <p>2026 fall season. Choose a grade group below.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="tryouts">
+      <div class="panel reveal">
+        <h3>Boys tryouts</h3>
+        <div class="tabs" role="tablist" aria-label="Choose a grade group">
+          <button class="tab" role="tab" aria-selected="true" aria-controls="t-young" data-tab="t-young">1st&ndash;3rd</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="t-mid" data-tab="t-mid">4th&ndash;7th</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="t-eighth" data-tab="t-eighth">8th</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="t-high" data-tab="t-high">9th&ndash;12th</button>
+        </div>
+        <div class="tabpanel on" id="t-young" role="tabpanel"><p style="margin:0">No tryouts. We are accepting new players, starting September 1st, 5:30&ndash;7:00 pm.</p></div>
+        <div class="tabpanel" id="t-mid" role="tabpanel">
+          <table>
+            <thead><tr><th>Grade</th><th>Dates and times</th></tr></thead>
+            <tbody>
+              <tr><td>4th</td><td>Aug 24 &amp; 26, 6:00&ndash;7:30 pm</td></tr>
+              <tr><td>5th</td><td>Aug 24 &amp; 26, 6:00&ndash;7:30 pm</td></tr>
+              <tr><td>6th</td><td>Aug 25 &amp; 26, 6:00&ndash;7:30 pm</td></tr>
+              <tr><td>7th</td><td>Aug 24, 6:00&ndash;7:30 pm &amp; Aug 26, 7:30&ndash;9:00 pm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tabpanel" id="t-eighth" role="tabpanel">
+          <table>
+            <thead><tr><th>Team</th><th>Dates and times</th></tr></thead>
+            <tbody>
+              <tr><td>Arvydas</td><td>Aug 24 &amp; 25, 7:30&ndash;9:00 pm</td></tr>
+              <tr><td>Stepas</td><td>Aug 24, 7:30&ndash;9:00 pm &amp; Aug 25, 7:00&ndash;8:30 pm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tabpanel" id="t-high" role="tabpanel">
+          <table>
+            <thead><tr><th>Grade</th><th>Dates and times</th></tr></thead>
+            <tbody>
+              <tr><td>9th &amp; 10th</td><td>Aug 24 &amp; 26, 7:30&ndash;9:00 pm</td></tr>
+              <tr><td>11th &amp; 12th</td><td>Aug 24 &amp; 26, 7:30&ndash;9:00 pm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Questions or ready to register? <a href="contact.html">Contact us</a>.</p>
+      </div>
+      <div class="panel reveal">
+        <h3>Sign up</h3>
+        <p style="margin:0 0 12px;color:var(--muted)">Reach out and we'll get back to you. Tap to copy.</p>
+        <div class="copy-list">
+          <button class="copy-item" data-copy="lituanica.info247@gmail.com"><span class="val">lituanica.info247@gmail.com</span><span class="hint">Copy</span></button>
+          <button class="copy-item" data-copy="(630) 235-0264"><span class="val">(630) 235-0264 &middot; Stepas</span><span class="hint">Copy</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="logo.png" alt="Lituanica logo">
+    <div>&copy; Lituanica Athletic Club NFP &middot; Lemont, IL
+      <span><a href="https://www.facebook.com/Lituanica-Basketball-Academy-102461096501814/" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/lituanicabasketball/" target="_blank" rel="noopener">Instagram</a></span>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+<script src="script.js"></script>
+</body>
+</html>
